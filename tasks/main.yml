@@ -1,0 +1,24 @@
+---
+- name: GPG keys imported
+  rpm_key:
+    key: 'https://packages.elastic.co/GPG-KEY-elasticsearch'
+
+- name: Elasticsearch repository at /etc/yum.repos.d/
+  copy:
+    src: elasticsearch.repo
+    dest: /etc/yum.repos.d/elasticsearch.repo
+
+- name: Packages installed
+  package: 
+    name: java-1.8.0-openjdk, elasticsearch
+    state: present
+
+- name: Elasticsearch server is running even after restarts
+  service:
+    name: elasticsearch
+    state: started
+    enabled: yes
+
+- name: Include plugins
+  include: plugins.yml
+...

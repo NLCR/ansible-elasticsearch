@@ -1,0 +1,6 @@
+---
+- name: analysis-icu plugin for elasticsearch
+  shell: /usr/share/elasticsearch/bin/plugin install analysis-icu
+         creates="/usr/share/elasticsearch/plugins/analysis-icu/plugin-descriptor.properties"
+  notify: restart elasticsearch
+  when: elastic.analysis_icu
